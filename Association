@@ -1,0 +1,11 @@
+Association is a simple structural connection or channel between classes and is a relationship where all objects have their own lifecycle and there is no owner. 
+
+Lets take an example of Department and Student. 
+
+Multiple students can associate with a single Department and single student can associate with multiple Departments, but there is no ownership between the objects and both have their own lifecycle. Both can create and delete independently.
+
+Here is respective Model and Code for the above example.
+
+
+https://www.go4expert.com/articles/association-aggregation-composition-t17264/
+
