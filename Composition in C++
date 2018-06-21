@@ -1,0 +1,160 @@
+In real-life, complex objects are often built from smaller, simpler objects. For example, a car is built using a metal frame, an engine, some tires, a transmission, a steering wheel, and a large number of other parts. A personal computer is built from a CPU, a motherboard, some memory, etc… Even you are built from smaller parts: you have a head, a body, some legs, arms, and so on. This process of building complex objects from simpler ones is called object composition.
+
+Broadly speaking, object composition models a “has-a” relationship between two objects. A car “has-a” transmission. Your computer “has-a” CPU. You “have-a” heart. The complex object is sometimes called the whole, or the parent. The simpler object is often called the part, child, or component.
+
+Composition
+
+To qualify as a composition, an object and a part must have the following relationship:
+
+The part (member) is part of the object (class)
+The part (member) can only belong to one object (class) at a time
+The part (member) has its existence managed by the object (class)
+The part (member) does not know about the existence of the object (class)
+A good real-life example of a composition is the relationship between a person’s body and a heart. Let’s examine these in more detail.
+
+Composition relationships are part-whole relationships where the part must constitute part of the whole object. For example, a heart is a part of a person’s body. The part in a composition can only be part of one object at a time. A heart that is part of one person’s body can not be part of someone else’s body at the same time.
+
+In a composition relationship, the object is responsible for the existence of the parts. Most often, this means the part is created when the object is created, and destroyed when the object is destroyed. But more broadly, it means the object manages the part’s lifetime in such a way that the user of the object does not need to get involved. For example, when a body is created, the heart is created too. When a person’s body is destroyed, their heart is destroyed too. Because of this, composition is sometimes called a “death relationship”.
+
+And finally, the part doesn’t know about the existence of the whole. Your heart operates blissfully unaware that it is part of a larger structure. We call this a unidirectional relationship, because the body knows about the heart, but not the other way around.
+
+
+Example:
+
+/*Specification:
+
+This program displays how composition is used. Three classes display the hours, minutes, day,
+
+month, year, and name pertaining to an event*/
+ 
+
+#include<iostream>
+
+#include<string> 
+
+using namespace std;
+ 
+
+class Time
+
+{     //Time class
+
+public:
+
+      Time();
+
+      Time(int, int);
+
+      void setTime(int, int);
+
+      void getTime(int&, int&);
+
+      void printTime();
+
+private:
+
+      int hr;
+
+      int min;
+};
+
+class Date
+
+{//Date class
+
+public:
+
+      Date();
+
+      Date(int, int, int);
+
+      void setDate(int, int, int);
+
+      void getDate(int&, int&, int&);
+
+      void printDate(); 
+
+private:
+
+      int month;
+
+      int day;
+
+      int year;
+
+};
+
+
+class Event
+
+{//Event class
+
+public:
+
+      Event(int hours = 0, int minutes = 0, int m = 1,
+
+            int d = 1, int y = 1900, string name = "Christmas"); 
+
+      void setEventData(int hours, int minutes, int m, int d, int y, string name);
+
+      void printEventData(); 
+
+private:
+
+      string eventName;
+
+      Time eventTime;
+
+      Date eventDay;
+
+};
+
+int main()
+
+{//instantiate an object and set data for Christmas
+
+      Event object;
+
+      object.setEventData(6, 0, 12, 25, 2010, "Christmas");
+
+      //print out the data for object
+
+      object.printEventData();
+
+      //instantiate the second object and set date for the fourth of July
+
+      Event object2;
+
+      object2.setEventData(1, 15, 7, 4, 2010, "Fourth of July");
+
+      //print out the data for the second object
+
+      object2.printEventData(); 
+
+      return 0;
+}
+
+Event::Event(int hours, int minutes, int m, int d, int y, string name)
+
+                   : eventTime(hours, minutes), eventDay(m, d, y)
+{
+      eventName = name;
+} 
+
+void Event::setEventData(int hours, int minutes, int m, int d, int y, string name)
+{
+      eventTime.setTime(hours, minutes);
+      eventDay.setDate(m, d, y);
+      eventName = name;
+} 
+
+void Event::printEventData()
+{
+      cout << eventName << " occurs ";
+      eventDay.printDate();
+      cout << " at ";
+      eventTime.printTime();
+      cout << endl;
+}
+
+ 
