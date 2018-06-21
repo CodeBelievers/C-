@@ -1,11 +1,56 @@
-Association is a simple structural connection or channel between classes and is a relationship where all objects have their own lifecycle and there is no owner. 
+Aggregation
 
-Lets take an example of Department and Student. 
+To qualify as an aggregation, a whole object and its parts must have the following relationship:
 
-Multiple students can associate with a single Department and single student can associate with multiple Departments, but there is no ownership between the objects and both have their own lifecycle. Both can create and delete independently.
+The part (member) is part of the object (class)
+The part (member) can belong to more than one object (class) at a time
+The part (member) does not have its existence managed by the object (class)
+The part (member) does not know about the existence of the object (class)
+Like a composition, an aggregation is still a part-whole relationship, where the parts are contained within the whole, and it is a unidirectional relationship. However, unlike a composition, parts can belong to more than one object at a time, and the whole object is not responsible for the existence and lifespan of the parts. When an aggregation is created, the aggregation is not responsible for creating the parts. When an aggregation is destroyed, the aggregation is not responsible for destroying the parts.
 
-Here is respective Model and Code for the above example.
+For example, consider the relationship between a person and their home address. In this example, for simplicity, we’ll say every person has an address. However, that address can belong to more than one person at a time: for example, to both you and your roommate or significant other. However, that address isn’t managed by the person -- the address probably existed before the person got there, and will exist after the person is gone. Additionally, a person knows what address they live at, but the addresses don’t know what people live there. Therefore, this is an aggregate relationship.
 
+Alternatively, consider a car and an engine. A car engine is part of the car. And although the engine belongs to the car, it can belong to other things as well, like the person who owns the car. The car is not responsible for the creation or destruction of the engine. And while the car knows it has an engine (it has to in order to get anywhere) the engine doesn’t know it’s part of the car.
 
-https://www.go4expert.com/articles/association-aggregation-composition-t17264/
+We can say that aggregation models “has-a” relationships (a department has teachers, the car has an engine).
+
+Similar to a composition, the parts of an aggregation can be singular or multiplicative
+
+#include <iostream>  
+using namespace std;  
+class Address {  
+    public:  
+   string addressLine, city, state;    
+     Address(string addressLine, string city, string state)    
+    {    
+        this->addressLine = addressLine;    
+        this->city = city;    
+        this->state = state;    
+    }    
+};  
+class Employee    
+    {    
+        private:  
+        Address* address;  //Employee HAS-A Address   
+        public:  
+        int id;    
+        string name;    
+        Employee(int id, string name, Address* address)    
+       {    
+           this->id = id;    
+           this->name = name;    
+           this->address = address;    
+       }    
+     void display()    
+       {    
+           cout<<id <<" "<<name<< " "<<     
+             address->addressLine<< " "<< address->city<< " "<<address->state<<endl;    
+       }    
+   };   
+int main(void) {  
+    Address a1= Address("C-146, Sec-15","Noida","UP");    
+    Employee e1 = Employee(101,"Nakul",&a1);    
+            e1.display();   
+   return 0;  
+}  
 
