@@ -1,3 +1,5 @@
+Composition
+
 In real-life, complex objects are often built from smaller, simpler objects. For example, a car is built using a metal frame, an engine, some tires, a transmission, a steering wheel, and a large number of other parts. A personal computer is built from a CPU, a motherboard, some memory, etc… Even you are built from smaller parts: you have a head, a body, some legs, arms, and so on. This process of building complex objects from simpler ones is called object composition.
 
 Broadly speaking, object composition models a “has-a” relationship between two objects. A car “has-a” transmission. Your computer “has-a” CPU. You “have-a” heart. The complex object is sometimes called the whole, or the parent. The simpler object is often called the part, child, or component.
@@ -157,4 +159,68 @@ void Event::printEventData()
       cout << endl;
 }
 
- 
+Time::Time()
+{     //default constructor
+      hr = 0;
+      min = 0;
+}
+
+Time::Time(int hours, int minutes)
+
+{     //class time constructor that accepts parameters
+            hr = hours;
+            min = minutes;
+} 
+
+void Time::setTime(int hours, int minutes)
+{     //sets a valid time
+       hr = hours;
+	   min = minutes;
+} 
+
+void Time::getTime(int& hours, int& minutes)
+{ 
+      hr = hours;
+      min = minutes;
+} 
+
+void Time::printTime()
+{ 
+      cout << hr << ":";
+      cout << min << endl;
+}
+
+Date::Date()
+{//default constructor
+      month = 1; 
+      day = 1;
+      year = 1900;  
+}
+
+Date::Date(int m, int d, int y)
+{//constructor that accepts parameters
+     month = m;
+     day = d;
+	year = 1900;
+} 
+
+void Date::setDate(int m, int d, int y)
+{//sets a valid date
+	month = m;
+    day = d;
+	year = 1900;
+} 
+
+void Date::getDate(int& m, int& d, int& y)
+{//returns the month, day and year
+      month = m;
+      day = d;
+      year = y;
+} 
+
+void Date::printDate()
+{//displays the month, day and year to the screen
+   cout << month << "/";
+   cout << day << "/";
+   cout << year;
+} 
